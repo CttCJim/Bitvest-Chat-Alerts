@@ -36,6 +36,7 @@
     }
     var oldhighest = getLastMsg();
     setInterval(function(){
+        if(oldhighest==0){return;}
         if(document.hasFocus()) {return;} //abort if you are already in the window
         var newhighest = getLastMsg();
         if(oldhighest==newhighest) {return;}
