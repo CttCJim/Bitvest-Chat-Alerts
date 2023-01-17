@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Bitvest Chat Alerts
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Notify the user when a particular user chats on bitvest.io
 // @author       CttCJim
 // @match        https://bitvest.io/*
@@ -37,8 +37,11 @@
     var oldhighest = getLastMsg();
     setInterval(function(){
         if(oldhighest==0){return;}
-        if(document.hasFocus()) {return;} //abort if you are already in the window
         var newhighest = getLastMsg();
+        if(document.hasFocus()) {
+            oldhighest=newhighest;
+            return;
+        } //abort if you are already in the window
         if(oldhighest==newhighest) {return;}
         var allchats = document.getElementsByClassName("msg");
         for(var i=oldhighest+1;i<=newhighest;i++) {
